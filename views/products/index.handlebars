@@ -4,29 +4,44 @@
 
 <div class="panel panel-primary">
   <div class="panel-heading">
-    <form style="margin: 10px;" action='/products/search' method='POST' class="form-inline">
+    <form method='GET' action='/'>
+
+      <!-- text search -->
       <div class="form-group">
-        Search: <input class='form-control' type='text' placeholder="search" name='search'>
-        <button class="btn btn-info">GO!</button>
+        <label for='search'>Search: </label>
+        <input id='search' class='form-control' type='text' placeholder="search" name='search[text]'>
       </div>
-    </form>
-    <!-- sorting -->
-    <form method="POST" action="/products/filter" style="margin: 10px;" class="form-inline sort-select">
-      <div class="form-group">
-        Filter By Category: {{#if categoryName}} {{categoryName}} {{/if}}
-        <select class="form-control" name="filterByCategory">
-          {{#each categories as |category|}}
-            <option value={{category}}>{{category}}</option>
-          {{/each}}
-        </select>
+
+      <!-- Search by Category && Filter by Price -->
+      <div class='row'>
+        <div class="form-group col-xs-6">
+          <label for='category'>Filter By Category:</label>
+          <select id='category' class="form-control" name="search[category]">
+            <option value='' selected></option>
+            {{#each categories as |category|}}
+              <option value={{category}}>{{category}}</option>
+            {{/each}}
+          </select>
+        </div>
+        <div class="form-group col-xs-3">
+          <label for="min price">Min price</label>
+          <select class="form-control" name="search[min_price]" id='min price'>
+            <option value=''></option>
+          </select>
+        </div>
+        <div class="form-group col-xs-3">
+          <label for="max price">Max price</label>
+          <select class="form-control" name="search[max_price]" id='max price'>
+            <option value=''></option>
+          </select>
+        </div>
       </div>
-      <button class="btn btn-info">GO!</button>
-    </form>
-    <!-- sorting -->
-    <form method="POST" action="/products/sort" style="margin: 10px;" class="form-inline sort-select">
+
+      <!-- Sort by  -->
       <div class="form-group">
-        Sort By:
-        <select class="form-control" name="sortOption">
+        <label for='sort option'>Sort By:</label>
+        <select class="form-control" name="search[sort]" id='sort option'>
+          <option value='' selected></option>
           <option value="nameA">Name Ascending</option>
           <option value="nameD">Name Descending</option>
           <option value="priceA">Price Ascending</option>
@@ -35,7 +50,11 @@
           <option value="dateA">Oldest First</option>
         </select>
       </div>
-      <button class="btn btn-info">GO!</button>
+      <div class="row">
+        <div class="col-xs-6">
+          <button type="submit" class="btn btn-info" id='search button'>SEARCH IT</button>
+        </div>
+      </div>
     </form>
   </div>
   <!-- SHOW ALL PRODUCTS -->
@@ -44,7 +63,7 @@
       {{#if product.isInCart}}
       <form method='GET' action='/cart'>
         <div class="col-xs-4">
-          <img src='/{{product.img}}' class='smallImg'>
+          <img src='/{{product.img}}' class='mediumImg'>
           <h3>${{product.price}}</h3>
           <h3><a href="/products/{{product.id}}">{{product.name}}</a></h3>
           <h5>{{product.description}}</h5>
@@ -54,7 +73,7 @@
       {{else}}
       <form method='POST' action='/cart'>
         <div class="col-xs-4">
-          <img src='/{{product.img}}' class='smallImg'>
+          <img src='/{{product.img}}' class='mediumImg'>
           <h3>${{product.price}}</h3>
           <h3><a href="/products/{{product.id}}">{{product.name}}</a></h3>
           <h5>{{product.description}}</h5>

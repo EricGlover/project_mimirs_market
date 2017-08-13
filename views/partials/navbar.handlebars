@@ -9,10 +9,12 @@
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-shopping-cart"></span></a>
           <ul class="dropdown-menu">
             {{#each cart as |item|}}
-              <li>> {{item.name}}</li>
-              <li>${{item.price}} per item</li>
-              <li>Quantity: {{item.quantity}}</li>
-              <li><hr></li>
+              <li> {{item.name}}
+                <ul>
+                  <li> ${{item.price}} per item</li>
+                  <li> Quantity: {{item.quantity}}</li>
+                </ul>
+              </li>
             {{/each}}
             <li><hr></li>
             <li><a href="/cart">Checkout</a></li>
@@ -22,9 +24,9 @@
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-menu-right"></span></a>
           <ul class="dropdown-menu">
             <li><a href='/'>Home</></li>
-            <li><a href='/ordrs'>Admin</></li>
+            <li><a href='/orders'>Admin</></li>
             <li><a href='/checkout'>Checkout</></li>
-            <li><a href='/chamberOfSecrets'>Chamber of Secrets</></li>
+            <li><a href='/chamberOfSecrets'>Chamber of Secrets</a></li>
           </ul>
         </li>
         <li><a href="/">Logout</a></li>

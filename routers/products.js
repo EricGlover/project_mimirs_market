@@ -6,6 +6,22 @@ const { Product, Category } = require("../models/sequelize");
 //TODO: refactor some of the model handling code
 //TODO: change the routing / front end so that it uses params instead of different routes
 
+//consider using this later to do validations
+let searchOptions = {
+  text: "",
+  category: "",
+  min_price: "",
+  max_price: "",
+  sort: {
+    nameA: { param: "name", cascade: "ASC" },
+    nameD: { param: "name", cascade: "DESC" },
+    priceA: { param: "price", cascade: "ASC" },
+    priceD: { param: "price", cascade: "DESC" },
+    dateA: { param: "date", cascade: "ASC" },
+    dateD: { param: "date", cascade: "DESC" }
+  }
+};
+
 //return a new array of products{} with isInCart set correctly
 let isInCart = function(cart, products) {
   let p = products.map(product => {
