@@ -42,6 +42,9 @@ let isInCart = function(cart, products) {
 
 //index Route
 router.get("/", (req, res) => {
+  //check the search parameters
+  /////for the non-null parameters, run your filters???
+
   req.session.cart = req.session.cart || [];
   let cats = Category.findAll({ attributes: ["name"] });
   let products = Product.findAll({});
@@ -81,9 +84,7 @@ router.get("/:productId", (req, res) => {
 //Enable text search that searches the name, category and description of a product
 //TODO: enable search by category
 router.post("/search", (req, res) => {
-  //category: { $regexp: r }
   let r = `${req.body.search}`;
-  debugger;
   Product.findAll({
     where: {
       $or: [{ name: { $regexp: r } }, { description: { $regexp: r } }]
